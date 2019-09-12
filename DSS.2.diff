@@ -1,0 +1,29 @@
+--- adminprotocol-lib.pl	2016-02-23 11:40:48.618177299 +0200
++++ adminprotocol-lib.pl	2016-02-23 13:00:41.774177299 +0200
+@@ -34,20 +34,21 @@
+ # Vital libraries
+ #use IO::Socket;
+ use Socket;
++use JSON;
+ 
+ @weekdayStr = ( "SunStr", "MonStr", "TueStr", "WedStr", "ThuStr", "FriStr", "SatStr" );
+ @monthStr = ( "JanStr", "FebStr", "MarStr", "AprStr", "MayStr", "JunStr", "JulStr", "AugStr", "SepStr", "OctStr", "NovStr", "DecStr" );
+ 
+-$enMessageHash = $ENV{"QTSSADMINSERVER_EN_MESSAGEHASH"};
+-$deMessageHash = $ENV{"QTSSADMINSERVER_EN_MESSAGEHASH"};
+-$jaMessageHash = $ENV{"QTSSADMINSERVER_EN_MESSAGEHASH"};
+-$frMessageHash = $ENV{"QTSSADMINSERVER_EN_MESSAGEHASH"};
++$enMessageHash = decode_json $ENV{"QTSSADMINSERVER_EN_MESSAGEHASH"};
++$deMessageHash = decode_json $ENV{"QTSSADMINSERVER_EN_MESSAGEHASH"};
++$jaMessageHash = decode_json $ENV{"QTSSADMINSERVER_EN_MESSAGEHASH"};
++$frMessageHash = decode_json $ENV{"QTSSADMINSERVER_EN_MESSAGEHASH"};
+ 
+ # GetMessageHash()
+ # Returns the messages hash given the language
+ sub GetMessageHash 
+ {
+-	return $ENV{"QTSSADMINSERVER_EN_MESSAGEHASH"};  
++	return $enMessageHash; 
+ }
+ 
+ # GetGenreArray()

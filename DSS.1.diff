@@ -1,0 +1,34 @@
+--- streamingadminserver.pl	2009-10-24 03:51:17.000000000 +0300
++++ streamingadminserver.pl	2016-02-23 13:20:28.510177299 +0200
+@@ -39,6 +39,7 @@
+ use Socket;
+ use POSIX;
+ use Sys::Hostname;
++use JSON;
+ #eval "use Net::SSLeay";
+ 
+ if ($^O eq "darwin")
+@@ -1417,10 +1418,10 @@
+ 		$ENV{"QTSSADMINSERVER_QTSSADMIN"} = $config{"qtssAdmin"};
+ 		$ENV{"QTSSADMINSERVER_HELPURL"} = $config{"helpurl"};
+ 		$ENV{"QTSSADMINSERVER_TEMPFILELOC"} = $config{"tempfileloc"};
+-		$ENV{"QTSSADMINSERVER_EN_MESSAGEHASH"} = $messages{"en"};
+-		$ENV{"QTSSADMINSERVER_DE_MESSAGEHASH"} = $messages{"de"};
+-		$ENV{"QTSSADMINSERVER_JA_MESSAGEHASH"} = $messages{"ja"};
+-		$ENV{"QTSSADMINSERVER_FR_MESSAGEHASH"} = $messages{"fr"};
++		$ENV{"QTSSADMINSERVER_EN_MESSAGEHASH"} = encode_json $messages{"en"};
++		$ENV{"QTSSADMINSERVER_DE_MESSAGEHASH"} = encode_json $messages{"de"};
++		$ENV{"QTSSADMINSERVER_JA_MESSAGEHASH"} = encode_json $messages{"ja"};
++		$ENV{"QTSSADMINSERVER_FR_MESSAGEHASH"} = encode_json $messages{"fr"};
+ 		$ENV{"GENREFILE"} = 'genres';
+ 		$ENV{"COOKIES"} = $header{'cookie'};
+ 		$ENV{"COOKIE_EXPIRE_SECONDS"} = $config{"cookieExpireSeconds"};
+@@ -2158,7 +2159,7 @@
+ 	$messagesfile{"en"} = $config{'root'} . "/html_en/" . $config{'messagesfile'}; 
+ 	$messagesfile{"de"} = $config{'root'} . "/html_en/" . $config{'messagesfile'}; 
+ 	$messagesfile{"fr"} = $config{'root'} . "/html_en/" . $config{'messagesfile'}; 
+-	$messagesfile{"jp"} = $config{'root'} . "/html_en/" . $config{'messagesfile'}; 
++	$messagesfile{"ja"} = $config{'root'} . "/html_en/" . $config{'messagesfile'}; 
+ 	
+ 	%messages = ();
+ 	for $lang (keys %messagesfile) {

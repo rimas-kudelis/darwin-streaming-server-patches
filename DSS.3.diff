@@ -1,0 +1,20 @@
+--- tag_formats.pl	2009-10-24 00:00:00.000000000 +0300
++++ tag_formats.pl	2016-02-23 23:21:00.285330899 +0200
+@@ -22,6 +22,8 @@
+ # @APPLE_LICENSE_HEADER_END@
+ #
+ 
++use JSON;
++
+ %defaultFormats = (
+ 	"qtssSvrStartupTime" => "localtime",
+ 	"qtssSvrCurrentTimeMilliseconds" => "localtime",
+@@ -42,7 +44,7 @@
+ # Returns the messages hash given the language
+ sub GetMessageHash 
+ {
+-	return $ENV{"QTSSADMINSERVER_EN_MESSAGEHASH"};  
++	return decode_json $ENV{"QTSSADMINSERVER_EN_MESSAGEHASH"};  
+ }
+ 
+ sub runFormatter {
